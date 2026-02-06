@@ -1,5 +1,44 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import WhatsappFloat from "../components/WhatsappFloat.astro";
+import HeaderNav from "../components/HeaderNav.astro";
+import HeroSection from "../components/HeroSection.astro";
+import ServicesSection from "../components/ServicesSection.astro";
+import ClassesSection from "../components/ClassesSection.astro";
+import TrainersSection from "../components/TrainersSection.astro";
+import PricingSection from "../components/PricingSection.astro";
+import TestimonialsSection from "../components/TestimonialsSection.astro";
+import ContactSection from "../components/ContactSection.astro";
+import MapSection from "../components/MapSection.astro";
+import FooterSection from "../components/FooterSection.astro";
+import { siteData } from "../data/siteData";
+---
+<Layout title="PowerGym - Transforma tu cuerpo">
+    <WhatsappFloat href={siteData.whatsapp.href} />
+    <HeaderNav
+        brandName={siteData.brand.name}
+        brandHighlight={siteData.brand.highlight}
+        navigation={siteData.navigation}
+    />
+    <HeroSection {...siteData.hero} />
+    <ServicesSection {...siteData.services} />
+    <ClassesSection {...siteData.classes} />
+    <TrainersSection {...siteData.trainers} />
+    <PricingSection {...siteData.pricing} />
+    <TestimonialsSection {...siteData.testimonials} />
+    <ContactSection {...siteData.contact} />
+    <MapSection src={siteData.map.src} />
+    <FooterSection
+        brandName={siteData.brand.name}
+        brandHighlight={siteData.brand.highlight}
+        tagline={siteData.brand.tagline}
+        quickLinks={siteData.footer.quickLinks}
+        hours={siteData.footer.hours}
+        newsletter={siteData.footer.newsletter}
+        copyright={siteData.footer.copyright}
+    />
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" is:inline></script>
 import Wsp from "../components/Wsp.astro";
 ---
 <Layout title="PowerGym - Transforma tu cuerpo">

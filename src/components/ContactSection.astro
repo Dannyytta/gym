@@ -1,0 +1,73 @@
+---
+interface InfoItem {
+  icon: string;
+  title: string;
+  detail: string;
+  detailSecondary?: string;
+}
+
+interface SelectOption {
+  value: string;
+  label: string;
+}
+
+interface Props {
+  title: string;
+  highlight: string;
+  subtitle: string;
+  info: InfoItem[];
+  selectOptions: SelectOption[];
+}
+
+const { title, highlight, subtitle, info, selectOptions } = Astro.props;
+---
+
+<section id="contacto" class="contacto section-padding">
+  <div class="container">
+    <div class="section-title" data-aos="fade-up">
+      <h2>{title}<span>{highlight}</span></h2>
+      <p>{subtitle}</p>
+    </div>
+    <div class="contacto-grid">
+      <div class="contacto-info" data-aos="fade-right">
+        {info.map((item) => (
+          <div class="info-item">
+            <div class="icon">
+              <i class={item.icon}></i>
+            </div>
+            <div class="info-content">
+              <h3>{item.title}</h3>
+              <p>{item.detail}</p>
+              {item.detailSecondary && <p>{item.detailSecondary}</p>}
+            </div>
+          </div>
+        ))}
+      </div>
+      <div class="contacto-form" data-aos="fade-left">
+        <form>
+          <div class="form-group">
+            <input type="text" placeholder="Nombre" required />
+          </div>
+          <div class="form-group">
+            <input type="email" placeholder="Email" required />
+          </div>
+          <div class="form-group">
+            <input type="tel" placeholder="Teléfono" />
+          </div>
+          <div class="form-group">
+            <select required>
+              <option value="" disabled selected>Interesado en...</option>
+              {selectOptions.map((option) => (
+                <option value={option.value}>{option.label}</option>
+              ))}
+            </select>
+          </div>
+          <div class="form-group">
+            <textarea placeholder="Mensaje" rows="5" required></textarea>
+          </div>
+          <button type="submit" class="btn">ENVIAR MENSAJE</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

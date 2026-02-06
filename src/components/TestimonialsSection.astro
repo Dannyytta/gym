@@ -1,0 +1,70 @@
+---
+interface Testimonial {
+  rating: number;
+  quote: string;
+  image: string;
+  alt: string;
+  name: string;
+  since: string;
+}
+
+interface Props {
+  title: string;
+  highlight: string;
+  subtitle: string;
+  items: Testimonial[];
+}
+
+const { title, highlight, subtitle, items } = Astro.props;
+
+const renderStars = (rating: number) => {
+  const stars = [];
+  const fullStars = Math.floor(rating);
+  const hasHalf = rating % 1 !== 0;
+
+  for (let i = 0; i < fullStars; i += 1) {
+    stars.push("full");
+  }
+  if (hasHalf) {
+    stars.push("half");
+  }
+
+  return stars;
+};
+---
+
+<section id="testimonios" class="testimonios section-padding">
+  <div class="container">
+    <div class="section-title" data-aos="fade-up">
+      <h2>{title} <span>{highlight}</span></h2>
+      <p>{subtitle}</p>
+    </div>
+    <div class="testimonios-slider">
+      {items.map((testimonial, index) => (
+        <div class="testimonio-card" data-aos="fade-up" data-aos-delay={100 * (index + 1)}>
+          <div class="testimonio-content">
+            <div class="rating">
+              {renderStars(testimonial.rating).map((star, starIndex) => (
+                <i
+                  class={
+                    star === "half" ? "fas fa-star-half-alt" : "fas fa-star"
+                  }
+                  aria-hidden="true"
+                  data-star-index={starIndex}
+                ></i>
+              ))}
+            </div>
+            <p>{testimonial.quote}</p>
+            <div class="cliente-info">
+              <img src={testimonial.image} alt={testimonial.alt} />
+              <div>
+                <h4>{testimonial.name}</h4>
+                <span>{testimonial.since}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
