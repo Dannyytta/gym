@@ -1,0 +1,36 @@
+---
+interface ServiceItem {
+  icon: string;
+  title: string;
+  description: string;
+}
+
+interface Props {
+  title: string;
+  highlight: string;
+  subtitle: string;
+  items: ServiceItem[];
+}
+
+const { title, highlight, subtitle, items } = Astro.props;
+---
+
+<section id="servicios" class="servicios section-padding">
+  <div class="container">
+    <div class="section-title" data-aos="fade-up">
+      <h2>{title} <span>{highlight}</span></h2>
+      <p>{subtitle}</p>
+    </div>
+    <div class="servicios-grid">
+      {items.map((service, index) => (
+        <div class="servicio-card" data-aos="fade-up" data-aos-delay={100 * (index + 1)}>
+          <div class="icon">
+            <i class={service.icon}></i>
+          </div>
+          <h3>{service.title}</h3>
+          <p>{service.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

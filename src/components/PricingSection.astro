@@ -1,0 +1,61 @@
+---
+interface Feature {
+  label: string;
+  available: boolean;
+}
+
+interface Plan {
+  name: string;
+  price: string;
+  period: string;
+  popular: boolean;
+  features: Feature[];
+}
+
+interface Props {
+  title: string;
+  highlight: string;
+  subtitle: string;
+  items: Plan[];
+  ctaLabel: string;
+}
+
+const { title, highlight, subtitle, items, ctaLabel } = Astro.props;
+---
+
+<section id="precios" class="precios section-padding">
+  <div class="container">
+    <div class="section-title" data-aos="fade-up">
+      <h2>{title} <span>{highlight}</span></h2>
+      <p>{subtitle}</p>
+    </div>
+    <div class="precios-grid">
+      {items.map((plan, index) => (
+        <div
+          class={`precio-card${plan.popular ? " popular" : ""}`}
+          data-aos="fade-up"
+          data-aos-delay={100 * (index + 1)}
+        >
+          {plan.popular && <div class="popular-tag">POPULAR</div>}
+          <div class="precio-header">
+            <h3>{plan.name}</h3>
+            <div class="precio">
+              <span>{plan.price}</span> {plan.period}
+            </div>
+          </div>
+          <div class="precio-body">
+            <ul>
+              {plan.features.map((feature) => (
+                <li>
+                  <i class={feature.available ? "fas fa-check" : "fas fa-times"}></i>
+                  {feature.label}
+                </li>
+              ))}
+            </ul>
+            <a href="#" class="btn">{ctaLabel}</a>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

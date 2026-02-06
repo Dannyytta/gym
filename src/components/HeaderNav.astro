@@ -1,0 +1,35 @@
+---
+interface NavItem {
+  href: string;
+  label: string;
+}
+
+interface Props {
+  brandName: string;
+  brandHighlight: string;
+  navigation: NavItem[];
+}
+
+const { brandName, brandHighlight, navigation } = Astro.props;
+const brandSuffix = brandName.replace(brandHighlight, "");
+---
+
+<header class="header">
+  <div class="container">
+    <div class="logo">
+      <a href="#"><span>{brandHighlight}</span>{brandSuffix}</a>
+    </div>
+    <nav class="navbar">
+      <ul>
+        {navigation.map((item) => (
+          <li><a href={item.href}>{item.label}</a></li>
+        ))}
+      </ul>
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </nav>
+  </div>
+</header>

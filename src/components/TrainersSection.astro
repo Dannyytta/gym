@@ -1,0 +1,49 @@
+---
+interface TrainerItem {
+  image: string;
+  alt: string;
+  name: string;
+  specialty: string;
+}
+
+interface SocialLink {
+  href: string;
+  icon: string;
+  label: string;
+}
+
+interface Props {
+  title: string;
+  highlight: string;
+  subtitle: string;
+  items: TrainerItem[];
+  socialLinks: SocialLink[];
+}
+
+const { title, highlight, subtitle, items, socialLinks } = Astro.props;
+---
+
+<section id="entrenadores" class="entrenadores section-padding">
+  <div class="container">
+    <div class="section-title" data-aos="fade-up">
+      <h2>{title} <span>{highlight}</span></h2>
+      <p>{subtitle}</p>
+    </div>
+    <div class="entrenadores-grid">
+      {items.map((trainer, index) => (
+        <div class="entrenador-card" data-aos="fade-up" data-aos-delay={100 * (index + 1)}>
+          <img src={trainer.image} alt={trainer.alt} />
+          <div class="entrenador-info">
+            <h3>{trainer.name}</h3>
+            <span>{trainer.specialty}</span>
+            <div class="social">
+              {socialLinks.map((link) => (
+                <a href={link.href} aria-label={link.label}><i class={link.icon}></i></a>
+              ))}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

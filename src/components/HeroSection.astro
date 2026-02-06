@@ -1,0 +1,29 @@
+---
+interface Cta {
+  href: string;
+  label: string;
+}
+
+interface Props {
+  title: string;
+  highlight: string;
+  subtitle: string;
+  primaryCta: Cta;
+  secondaryCta: Cta;
+}
+
+const { title, highlight, subtitle, primaryCta, secondaryCta } = Astro.props;
+---
+
+<section id="inicio" class="hero">
+  <div class="container">
+    <div class="hero-content" data-aos="fade-right">
+      <h1>{title} <span>{highlight}</span> CON NOSOTROS</h1>
+      <p>{subtitle}</p>
+      <div class="hero-buttons">
+        <a href={primaryCta.href} class="btn">{primaryCta.label}</a>
+        <a href={secondaryCta.href} class="btn btn-outline">{secondaryCta.label}</a>
+      </div>
+    </div>
+  </div>
+</section>

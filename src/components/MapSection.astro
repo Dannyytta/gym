@@ -1,0 +1,15 @@
+---
+interface Props {
+  src: string;
+}
+
+const { src } = Astro.props;
+---
+
+<div class="mapa">
+  <iframe
+    src={src}
+    allowfullscreen=""
+    loading="lazy"
+  ></iframe>
+</div>
